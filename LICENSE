@@ -1,0 +1,22 @@
+Licensing
+
+Copyright (c) 2026 XiaoZheBrother and contributors.
+
+Original documentation, including Markdown text and original diagrams, is
+licensed under the Creative Commons Attribution 4.0 International License
+(SPDX: CC-BY-4.0).
+
+You may share and adapt that documentation, including commercially, subject to
+the license terms, including appropriate attribution, a link to the license,
+and an indication of changes.
+
+Full legal terms:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Original source code under examples/ and scripts/, and the validation workflow,
+is licensed under the MIT License reproduced in LICENSE-CODE.
+
+This repository does not grant rights to Live2D software, third-party sample
+models, OC character artwork, branding, or other assets not included here.
+External linked resources retain their own licenses. References to products
+and projects do not imply endorsement.
