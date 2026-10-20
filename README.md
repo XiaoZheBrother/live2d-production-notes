@@ -1,17 +1,48 @@
-# Live2D 制作与 Web 接入实战笔记
+# AI 全流程制作 Live2D
 
-从 OC 娘的实际制作过程里，整理可复用的建模、动作、换装、渲染和验收经验。
+**从角色设计、AI 出图与精修，到原生 Cubism 绑定、九个动作、统一换装和 Web 接入。**
 
-这里记录过的真实问题包括：转头把脸拉扁、眼睛失去神态、肩袖像贴片、动作掉帧后变慢、换装漏掉手腕与特殊姿态、暗色背景出现白边，以及“预览修好了，但原生模型没修好”。
+*An end-to-end, AI-driven Live2D production workflow for AI Builders.*
 
-**适合读者：** 有插画或分层素材，希望制作原生 Cubism 模型并接入网页的个人开发者、技术美术和 AI 辅助创作者。阅读不需要取得 OC 娘资产。
+我们用 AI Agent 贯穿 OC 娘的制作：讨论设计、生成候选图、修正素材、编写拆层与绑定脚本、组织原生工程、实现动作与渲染、生成检查程序，再根据人的视觉反馈迭代。这里记录的是这条完整制作链，以及它怎样一步步从“能动”走到“能接入产品”。
 
-本仓库公开方法、教学示例和检查模板；角色原画、PSD、CMO3、MOC3、商业项目代码及 Cubism Core 不在发布范围内。
+**“全流程使用 AI”在这里的具体分工：** 人提出角色方向、选择候选并确认画面；AI 执行设计探索、美术迭代、工程实现和验证；Cubism 官方工具负责相应的编辑、保存与原生导出。制作期间，许可与试用启用由用户完成。
+
+**适合读者：** 想把 AI 生成的角色做成可交互产品的 AI Builder、独立开发者，以及希望把 AI 接入现有工作流的美术和技术美术。阅读不需要取得 OC 娘资产。
+
+## 先看 AI 实际做了什么
+
+| 制作阶段 | AI 的实际工作 | 交付与确认 |
+|---|---|---|
+| 角色与服装设计 | 根据角色性格生成日常、暗夜与发型候选 | 人选择方向，锁定身份与五官 |
+| 出图、拆层与精修 | 生成/编辑底图，编写遮罩、配准、补全与打包脚本 | 回合成、透明边缘与同角度对照 |
+| 原生绑定 | 编写网格、关键形采样、工程整理与检查程序 | 官方 Editor 保存导出，Core 检查 |
+| 动作与表情 | 实现九向跟随、九动作、眨眼、发尾和动作衔接 | 全身动态与五官/关节近景 |
+| 单模型与换装 | 整合主模型，建立发型/服装/饰品的全动作覆盖 | 日常/暗夜统一切换，包含崇拜 |
+| Web 产品接入 | 编写宿主控制、高清渲染、主题和双向转场 | 实际页面同尺寸动态验收 |
+| 排错与交付 | 定位缺陷、写回归检查、组织版本与资源清单 | 人确认视觉结果，保留回退基线 |
+
+**推荐从这里读：** [我们怎样用 AI 做完整个流程](docs/00-ai-pipeline.md) → [AI Builder 起步路线](docs/13-ai-builder-quickstart.md) → [可复制的 Agent 任务模板](templates/ai-task.md)。
+
+本仓库公开工作方法、教学示例和检查模板。角色原画、PSD、CMO3、MOC3、完整项目脚本与 Cubism Core 不在本次开源范围；如何把经验迁移到自己的角色，见起步路线。
+
+## 我们做到了什么
+
+- 一个原生主模型承载九个动作：待机、翻书、挥手、思考、鼓励、倾听、失落、害羞、崇拜。
+- 小幅九向转头、头身与眼睛跟随、眨眼和发尾轻摆。
+- 日常与暗夜造型全动作联动，主题切换配合追光登场与翻页迎晨。
+- 同尺寸高清渲染、全身与近景对照、参数与资产回归检查。
+
+以上是 OC 娘项目的制作结果，当前公开仓库提供的是流程与独立教学示例。技术实现、验证范围和宿主依赖见[证据记录](references/project-evidence.md)。
+
+我们也公开踩坑过程：转头把脸拉扁、眼睛失去神态、肩袖像贴片、掉帧让动作变慢、换装漏掉混合袖口、深色背景露白边，以及预览补偿与原生修复不一致。
 
 ## 从哪里开始
 
 | 你的目标 | 建议阅读 |
 |---|---|
+| 想了解全流程 AI 制作怎么落地 | [AI 制作实录](docs/00-ai-pipeline.md) |
+| 想让 Agent 帮自己做第一个角色 | [AI Builder 起步路线](docs/13-ai-builder-quickstart.md)与[任务模板](templates/ai-task.md) |
 | 第一次做可交付模型 | [制作流程与交付边界](docs/01-workflow.md) → [拆层与素材](docs/02-artwork.md) → [原生导出](docs/09-native-delivery.md) |
 | 头部像平移、脸被压扁 | [九向转头、眼神与头身跟随](docs/03-head-and-eyes.md) |
 | 手太扁、肩袖断开、脖子不自然 | [手部与身体接缝](docs/04-body-and-hands.md) |
@@ -19,10 +50,14 @@
 | 想做统一换装 | [单模型与全动作外观](docs/06-appearance.md) |
 | 接入网页后变糊 | [高清、透明度与性能](docs/07-rendering.md) |
 | 想做日夜双向转场 | [主题转场](docs/08-transitions.md) |
-| 想用 AI 减少重复工作 | [AI 与方案调研](docs/11-research.md) |
+| 想了解我们实际用了哪些工具、调研过什么 | [AI 制作证据](references/ai-evidence.md)与[工具方案调研](docs/11-research.md) |
 | 已有问题，直接查修法 | [故障速查表](docs/12-troubleshooting.md) |
 
 ## 阅读地图
+
+**主线：** [AI 全流程制作实录](docs/00-ai-pipeline.md) · [AI Builder 起步路线](docs/13-ai-builder-quickstart.md)
+
+**专题：**
 
 1. [制作流程与交付边界](docs/01-workflow.md)
 2. [拆层、补全与局部精修](docs/02-artwork.md)
@@ -34,7 +69,7 @@
 8. [日夜双向转场](docs/08-transitions.md)
 9. [原生工程、导出与版本交付](docs/09-native-delivery.md)
 10. [回归验证与同条件对照](docs/10-validation.md)
-11. [AI 辅助与成熟方案调研](docs/11-research.md)
+11. [AI 工具与成熟方案调研](docs/11-research.md)
 12. [故障速查表](docs/12-troubleshooting.md)
 
 补充材料：
@@ -43,9 +78,10 @@
 - [案例：崇拜动作的造型统一与眉眼校准](cases/02-admiration.md)
 - [案例：原生马尾层级与网页临时补偿](cases/03-hair-order.md)
 - [来源与证据边界](references/sources.md)
+- [AI 制作环节与产物对应](references/ai-evidence.md)
 - [版本与历史验证摘录](references/project-evidence.md)
 - [术语表](docs/glossary.md)
-- [验收清单](templates/review-checklist.md) / [问题复盘模板](templates/incident.md) / [交付模板](templates/release.md)
+- [Agent 任务模板](templates/ai-task.md) / [验收清单](templates/review-checklist.md) / [问题复盘模板](templates/incident.md) / [交付模板](templates/release.md)
 
 ## 先记住五件事
 
@@ -57,12 +93,15 @@
 
 ```mermaid
 flowchart LR
-  A[确认底图] --> B[拆层与回合成]
-  B --> C[原生关键形与参数]
-  C --> D[同姿态视觉对照]
-  D --> E[动作与换装组合]
-  E --> F[官方导出和目标宿主验证]
-  F --> G[带版本记录的交付]
+  A[人提出角色方向] --> B[AI 设计与出图]
+  B --> C[人确认底图]
+  C --> D[AI 拆层与工程脚本]
+  D --> E[Cubism 保存与原生导出]
+  E --> F[AI 动作与 Web 实现]
+  F --> G[AI 回归与动态对照]
+  G --> H[人验收效果]
+  H -->|反馈局部问题| D
+  H -->|通过| I[版本化交付]
 ```
 
 ## 可运行的小例子
