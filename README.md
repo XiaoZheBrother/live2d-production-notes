@@ -84,6 +84,7 @@
 - [案例：原生马尾层级与网页临时补偿](cases/03-hair-order.md)
 - [案例：侧脸数值通过，视觉仍然失败](cases/04-reference-angle-head.md)
 - [案例：肘部回到第一版做局部修复](cases/05-elbow-minimal-repair.md)
+- [案例：头冠采样全过，发际仍然缺角](cases/06-crown-coverage-gap.md)
 - [来源与证据边界](references/sources.md)
 - [AI 制作环节与产物对应](references/ai-evidence.md)
 - [版本与历史验证摘录](references/project-evidence.md)
@@ -114,7 +115,7 @@ flowchart LR
 
 ## 可运行的小例子
 
-`examples/` 是独立编写的教学代码，展示时间推进、帧率无关跟随、外观异步提交、有约束的退出路径和文件哈希清单，不依赖 SDK，也不包含商业项目的运行器。
+`examples/` 是独立编写的教学代码，展示时间推进、帧率无关跟随、外观异步提交、有约束的退出路径、空间采样漏检与文件哈希清单，不依赖 SDK，也不包含商业项目的运行器。
 
 ```bash
 node --test examples/*.test.mjs
