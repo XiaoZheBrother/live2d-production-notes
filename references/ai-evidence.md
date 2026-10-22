@@ -2,7 +2,7 @@
 
 [返回目录](../README.md) · [完整制作实录](../docs/00-ai-pipeline.md)
 
-核对日期：2026-10-20。本页说明“全流程使用 AI”对应了哪些实际工作与产物。表中原项目文件名是历史证据线索，不是本公共仓库包含的可运行命令。
+首轮核对日期：2026-10-20；独立暗夜阶段补充：2026-10-22。本页说明“全流程使用 AI”对应了哪些实际工作与产物。表中原项目文件名是历史证据线索，不是本公共仓库包含的可运行命令。
 
 | 环节 | 实际执行方式 | 历史产物线索 |
 |---|---|---|
@@ -16,7 +16,13 @@
 | 暗夜换装 | Agent 准备新素材、动作袖片与混合手部副本、原生参数和覆盖检查 | `prepareNightNative.mjs`、`buildNightNative.py`、`verifyNightNative.mjs` |
 | Web 与高清 | Agent 实现宿主控制、合成、尺寸链与高清对照 | `ocScene.mjs`、`clarityResolve.mjs`、同尺寸对照记录 |
 | 双向转场 | 人确认概念，Agent 完成分镜素材与动态实现 | 追光聚拢、翻页迎晨及透明背景修正记录 |
-| 最后一次袖口修补 | 图像工具出候选，Agent 写局部配准、保护皮肤、图集/源工程同步与检查 | `packageBookCuffCleanup.mjs`、`embedBookCuffCleanup.py`、槽位与哈希报告 |
+| 第一阶段袖口修补 | 图像工具出候选，Agent 写局部配准、保护皮肤、图集/源工程同步与检查 | `packageBookCuffCleanup.mjs`、`embedBookCuffCleanup.py`、槽位与哈希报告 |
+| 独立暗夜脸 | 以确认原画统一坐标回合成，再补隐藏区域、眨眼和可动参数 | 静态 `authoring-report.json` 与独立动态、全身 `native-verification.json` |
+| 参考角度驱动的夸奖 | AI 生成角度候选，人确认；配准、专用 UV、原生交接及旧动作回归 | `angle-art-image-provenance.json`、`verifyNightPraiseAngleArt.mjs` |
+| 打招呼最小修复 | 从确认版恢复轨迹，仅修肘部并比较非目标几何 | `elbow-local-verification.json` |
+| 鼓励与失败候选 | 独立表情与手势、参数依赖、任意允许时刻退出与实际 Alpha 检查 | `independent-exit-verification.json`、`collar-native-alpha-verification.json` |
+
+后续候选的导出、视觉确认与产品同步状态见[暗夜证据快照](night-character-evidence.md)。AI 生成分镜和 AI 操作工具取得的原生截图是两类产物，不能相互替代。
 
 ## 人与工具分别承担什么
 

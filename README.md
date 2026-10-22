@@ -26,14 +26,16 @@
 
 本仓库公开工作方法、教学示例和检查模板。角色原画、PSD、CMO3、MOC3、完整项目脚本与 Cubism Core 不在本次开源范围；如何把经验迁移到自己的角色，见起步路线。
 
-## 我们做到了什么
+## 第一阶段做到的结果
 
-- 一个原生主模型承载九个动作：待机、翻书、挥手、思考、鼓励、倾听、失落、害羞、崇拜。
+- 一个原生主模型承载九类表现：待机、翻书、挥手、思考、鼓励、倾听、失落、害羞、崇拜。其中待机是持续状态，其他是可进入和退出的动作。
 - 小幅九向转头、头身与眼睛跟随、眨眼和发尾轻摆。
 - 日常与暗夜造型全动作联动，主题切换配合追光登场与翻页迎晨。
 - 同尺寸高清渲染、全身与近景对照、参数与资产回归检查。
 
-以上是 OC 娘项目的制作结果，当前公开仓库提供的是流程与独立教学示例。技术实现、验证范围和宿主依赖见[证据记录](references/project-evidence.md)。
+以上是截至 2026-10-20 的第一阶段结果，当前公开仓库提供的是流程与独立教学示例。技术实现、验证范围和宿主依赖见[证据记录](references/project-evidence.md)。
+
+**2026-10-22 补充：暗夜开始作为独立角色制作。** 新待机、脸部与动作不再强套日常的甜美表演。本轮新增[暗夜经验与旧结论修订](docs/14-night-character-lessons.md)，包括参考角度驱动的侧脸、肘部最小修复、动作语义与有约束的中途退出。早期“全动作换装完成”不能解释为新版暗夜的全部独立动作已完成；每项进度见[后续证据快照](references/night-character-evidence.md)。
 
 我们也公开踩坑过程：转头把脸拉扁、眼睛失去神态、肩袖像贴片、掉帧让动作变慢、换装漏掉混合袖口、深色背景露白边，以及预览补偿与原生修复不一致。
 
@@ -48,6 +50,7 @@
 | 手太扁、肩袖断开、脖子不自然 | [手部与身体接缝](docs/04-body-and-hands.md) |
 | 动作慢、切换变色、回不到待机 | [动作与时间系统](docs/05-motion-and-time.md) |
 | 想做统一换装 | [单模型与全动作外观](docs/06-appearance.md) |
+| 新角色不能再套旧脸，或想知道哪些旧结论变了 | [暗夜独立角色：新增经验与旧结论修订](docs/14-night-character-lessons.md) |
 | 接入网页后变糊 | [高清、透明度与性能](docs/07-rendering.md) |
 | 想做日夜双向转场 | [主题转场](docs/08-transitions.md) |
 | 想了解我们实际用了哪些工具、调研过什么 | [AI 制作证据](references/ai-evidence.md)与[工具方案调研](docs/11-research.md) |
@@ -71,15 +74,20 @@
 10. [回归验证与同条件对照](docs/10-validation.md)
 11. [AI 工具与成熟方案调研](docs/11-research.md)
 12. [故障速查表](docs/12-troubleshooting.md)
+13. [AI Builder 起步路线](docs/13-ai-builder-quickstart.md)
+14. [暗夜独立角色：新增经验与旧结论修订](docs/14-night-character-lessons.md)
 
 补充材料：
 
 - [案例：暗夜翻书袖口的绿色残片](cases/01-book-cuff.md)
 - [案例：崇拜动作的造型统一与眉眼校准](cases/02-admiration.md)
 - [案例：原生马尾层级与网页临时补偿](cases/03-hair-order.md)
+- [案例：侧脸数值通过，视觉仍然失败](cases/04-reference-angle-head.md)
+- [案例：肘部回到第一版做局部修复](cases/05-elbow-minimal-repair.md)
 - [来源与证据边界](references/sources.md)
 - [AI 制作环节与产物对应](references/ai-evidence.md)
 - [版本与历史验证摘录](references/project-evidence.md)
+- [暗夜独立角色证据快照](references/night-character-evidence.md)
 - [术语表](docs/glossary.md)
 - [Agent 任务模板](templates/ai-task.md) / [验收清单](templates/review-checklist.md) / [问题复盘模板](templates/incident.md) / [交付模板](templates/release.md)
 
@@ -106,7 +114,7 @@ flowchart LR
 
 ## 可运行的小例子
 
-`examples/` 是独立编写的教学代码，展示时间推进、帧率无关跟随、外观异步提交和文件哈希清单，不依赖 SDK，也不包含商业项目的运行器。
+`examples/` 是独立编写的教学代码，展示时间推进、帧率无关跟随、外观异步提交、有约束的退出路径和文件哈希清单，不依赖 SDK，也不包含商业项目的运行器。
 
 ```bash
 node --test examples/*.test.mjs
@@ -123,6 +131,6 @@ python scripts/check_docs.py
 - **仅调研**：阅读了作者文档，未据此宣称已经在本项目跑通。
 - **建议**：从案例提炼的实践方法，参数需要按自己的角色调整。
 
-整理日期：**2026-10-20**。主要历史环境为 Cubism Editor 5.3.04、SDK 5.0 导出目标与 Cubism Core 5.1.0；不是兼容所有版本的承诺。旧候选方案与最终采用结果的区别见[证据记录](references/project-evidence.md)。
+首次整理：**2026-10-20**；本轮经验修订：**2026-10-22**。主要历史环境为 Cubism Editor 5.3.04、SDK 5.0 导出目标与 Cubism Core 5.1.0；不是兼容所有版本的承诺。旧候选方案与后续结果的区别见[证据记录](references/project-evidence.md)和[修订说明](docs/14-night-character-lessons.md)。
 
 欢迎提交可复现问题和改进，见 [CONTRIBUTING](CONTRIBUTING.md)。原创文档使用 CC BY 4.0，独立示例代码使用 MIT，详见 [LICENSE](LICENSE)。
