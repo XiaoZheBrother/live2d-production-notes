@@ -1,5 +1,7 @@
 # AI 全流程制作 Live2D
 
+**2026-11-02 更新：** [后续新功能、失败路线与推论修订](docs/15-post-integration-lessons.md)已整理；新增可安装的 [live2d-production skill](skills/live2d-production/SKILL.md)。它提供制作、精修、原生交付和宿主排障流程与只读检查器，不是通用自动绑定编译器。安装与使用见 [skill 指南](docs/16-skill-guide.md)。
+
 **从角色设计、AI 出图与精修，到原生 Cubism 绑定、九个动作、统一换装和 Web 接入。**
 
 *An end-to-end, AI-driven Live2D production workflow for AI Builders.*
@@ -132,6 +134,6 @@ python scripts/check_docs.py
 - **仅调研**：阅读了作者文档，未据此宣称已经在本项目跑通。
 - **建议**：从案例提炼的实践方法，参数需要按自己的角色调整。
 
-首次整理：**2026-10-20**；本轮经验修订：**2026-10-22**。主要历史环境为 Cubism Editor 5.3.04、SDK 5.0 导出目标与 Cubism Core 5.1.0；不是兼容所有版本的承诺。旧候选方案与后续结果的区别见[证据记录](references/project-evidence.md)和[修订说明](docs/14-night-character-lessons.md)。
+首次整理：**2026-10-20**；后续修订：**2026-10-22、2026-11-02**。主要历史环境为 Cubism Editor 5.3.04、SDK 5.0 导出目标与 Cubism Core 5.1.0；不是兼容所有版本的承诺。旧候选方案与后续结果的区别见[证据记录](references/project-evidence.md)、[首轮修订](docs/14-night-character-lessons.md)和[第二轮审计](docs/15-post-integration-lessons.md)。
 
 欢迎提交可复现问题和改进，见 [CONTRIBUTING](CONTRIBUTING.md)。原创文档使用 CC BY 4.0，独立示例代码使用 MIT，详见 [LICENSE](LICENSE)。

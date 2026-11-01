@@ -4,7 +4,7 @@
 
 这篇负责工具选型。我们实际怎样用 AI 贯穿设计、出图、绑定、动作、接入与验证，见[全流程制作实录](00-ai-pipeline.md)。
 
-以下把本项目实际采用的方法与只读调研区分开。外部项目页面于 2026-10-20 复核；本仓库没有替这些工具提供兼容认证。
+以下把本项目实际采用的方法与只读调研区分开。旧项目页面于 2026-10-20 复核；2026-11-02 的状态更新见下文及[来源索引](../references/post-integration-evidence.md)。本仓库没有替这些工具提供兼容认证。
 
 ## 已采用的路线
 
@@ -16,7 +16,7 @@ AI Agent 负责从设计探索到工程实现的执行：调用图像工具生�
 
 | 路线与一手来源 | 能参考什么 | 本项目证据与限制 |
 |---|---|---|
-| [See-through](https://github.com/shitagaki-lab/see-through) | 单图语义分层、隐藏部分补全、PSD 输出 | 仅调研。作者明确分层不等于完整 Live2D 绑定；细粒度艺术拆分还需设计 |
+| [See-through](https://github.com/shitagaki-lab/see-through) | 单图语义分层、隐藏部分补全、PSD 输出 | 后续本地推理已跑通，完整头部动态未通过；细边、隐藏区和跨角度发束归属仍要处理 |
 | [PSD2Live](https://github.com/tsunehimatoi/psd2live) | 作者声明的 PSD 自动绑定、网格/变形器、编辑与导出流程 | 仅调研。没有在本项目完成完整资产往返与所有动作兼容验证 |
 | [AutoLive2d](https://github.com/Fenglin-Maple/AutoLive2d) | AI 辅助角色和表情的实践流程 | 仅调研。学习完整脸部上下文与局部素材的协调，不据网页动画推断官方原生格式兼容 |
 | [Cubism 官方 Web Samples](https://github.com/Live2D/CubismWebSamples) | 模型加载、动作、表情、交互的参考实现 | 阅读机制与文件组织；示例素材和 SDK 使用遵守各自许可 |
@@ -27,6 +27,8 @@ See-through 官方当前说明有不同显存优化路线。具体硬件需求�
 历史还关注过通用图像分层、单图到可编辑角色研究、Alpha 编辑 API 等方向。它们可进入后续调研清单，但没有纳入本仓库的已验证交付链，不把论文效果、作者演示或 Alpha 功能写成项目已完成能力。
 
 ## 怎么选择，避免工具清单变成承诺
+
+[live2d-halfbody-skill](https://github.com/bellisji233/live2d-halfbody-skill) 在 2026-11-02 复核时提供图像变体、拆层、绑定、运行包和 VTS 自查链；作者明确不支持全身/大幅转头，也不输出可编辑 CMO。值得参考其分阶段任务和检查入口，不应把它的半身素材限制套到已确认全身角色。本轮借鉴工作流结构独立编写 [production skill](../skills/live2d-production/SKILL.md)，没有执行该项目全链或复制 rigkit。
 
 先给一个眼睛或袖口的小样，检查：
 
