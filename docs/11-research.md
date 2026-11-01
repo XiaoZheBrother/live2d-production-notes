@@ -28,7 +28,7 @@ See-through 官方当前说明有不同显存优化路线。具体硬件需求�
 
 ## 怎么选择，避免工具清单变成承诺
 
-[live2d-halfbody-skill](https://github.com/bellisji233/live2d-halfbody-skill) 在 2026-11-02 复核时提供图像变体、拆层、绑定、运行包和 VTS 自查链；作者明确不支持全身/大幅转头，也不输出可编辑 CMO。值得参考其分阶段任务和检查入口，不应把它的半身素材限制套到已确认全身角色。本轮借鉴工作流结构独立编写 [production skill](../skills/live2d-production/SKILL.md)，没有执行该项目全链或复制 rigkit。
+本项目的任务拆解、环境预检与验收流程已整理为 [production skill](../skills/live2d-production/SKILL.md)，用于保护已确认的外观、明确交付格式和记录验证范围。
 
 先给一个眼睛或袖口的小样，检查：
 

@@ -37,7 +37,6 @@ See-through 约 527 秒/图、5.35 GiB 已分配峰值、7.71 GiB 保留峰值�
 
 ## 外部资料复核
 
-- [halfbody 固定版本](https://github.com/bellisji233/live2d-halfbody-skill/tree/78b0be9674884d5b3834ba438cf5997347525773)：2026-11-02 读取 README、SKILL、rigkit/build.py 和 rigkit/moc.py。确认有执行链，使用 vendored py-moc3 写运行格式；作者明确不产出可编辑 CMO、不支持全身/大角度。没有执行全链或复制代码/提示词。
 - [See-through](https://github.com/shitagaki-lab/see-through)：此轮复核项目入口；本机旧试验固定源码 `df019de5129d6c4b406587a14c3501669441a783`。上游变动不自动改变旧结果。
 - [Skinning](https://docs.live2d.com/en/cubism-editor-manual/skinning/) 与 [Deform Paths](https://docs.live2d.com/en/cubism-editor-manual/deformpath/)：官方功能辅助细长部件变形；不据此推导反面纹理或整头保真自动解决。
 
